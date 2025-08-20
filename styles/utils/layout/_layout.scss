@@ -1,0 +1,19 @@
+.container{
+  width: 100%;
+  height: inherit;
+  padding: var(--unit-1) var(--unit-3);
+}
+.columns{
+  display: flex;
+  flex-wrap: wrap;
+  height: inherit;
+  align-items: center;
+}
+
+// create classes
+$grid-columns: 12;
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    width: percentage($i / $grid-columns);
+  }
+}

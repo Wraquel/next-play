@@ -1,0 +1,54 @@
+
+@use "utils/layout/layout";
+@use "utils/cursor/cursor";
+@use "utils/colors/colors" as colors;
+@use "utils/fonts/fonts";
+
+nextjs-portal {
+  display: none !important;
+}
+
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+}
+
+body {
+  color: var(--contrast-color);
+  background: var(--primary-color);
+  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:root {
+  /* --background: #ffffff;
+  --foreground: #171717; */
+  // --background: #0a0a0a;
+  // --foreground: #ededed;
+  
+
+  // colors
+  --primary-color: #{colors.$primary-color};
+  --secondary-color: #{colors.$secondary-color};
+  --neutral-color: #{colors.$neutral-color};
+  --contrast-color: #{colors.$contrast-color};
+
+  // units
+  --unit-1: 0.5rem;
+  --unit-2: 1rem;
+  --unit-3: 1.5rem;
+  --unit-4: 2rem;
+}

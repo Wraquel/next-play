@@ -12,12 +12,7 @@ type LayoutProps = {
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
 
-  const buttons = [
-    { name: "home" },
-    { name: "register" },
-    { name: "search" },
-    { name: "other" },
-  ];
+  const buttons = [{ name: "register" }, { name: "search" }, { name: "other" }];
 
   function handleButton(item: { name: string }) {
     if (item.name === "register") {
@@ -26,16 +21,14 @@ const Layout = ({ children }: LayoutProps) => {
       router.push(Routes.SEARCH);
     } else if (item.name === "other") {
       router.push(Routes.OTHER);
-    } else if (item.name === "home") {
-      router.push(Routes.HOME);
     }
   }
 
   const buttonsToShow = buttons.map((item) => {
     return (
-      <li key={item.name}>
+      <div key={item.name}>
         <Button onClick={() => handleButton(item)}>{item.name}</Button>
-      </li>
+      </div>
     );
   });
   return (
