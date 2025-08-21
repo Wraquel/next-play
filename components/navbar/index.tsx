@@ -20,7 +20,7 @@ const Navbar = ({ children }: NavProps) => {
               <h1>🔮Icon</h1>
             </span>
           </div>
-          <div className="col-10">
+          <div className="col-8">
             <div className={style.btns}>{children}</div>
           </div>
         </div>

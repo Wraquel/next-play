@@ -1,0 +1,11 @@
+.input{
+  display: flex;
+  flex-direction: column;
+  padding-bottom: var(--unit-3) ;
+  & input {
+    padding: var(--unit-1);
+    background:none;
+    border: none;
+    border-bottom: solid 1px rgb(132, 126, 126);
+  }
+}

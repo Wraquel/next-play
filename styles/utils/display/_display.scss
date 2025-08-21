@@ -1,0 +1,29 @@
+$justify-content: (
+  center: center,
+  end: end,
+  start: start,
+  space-between: space-between,
+);
+$align-items: (
+  center: center,
+  end: end,
+  start: start,
+);
+.d-flex {
+  display: flex;
+}
+.direction-col {
+ flex-direction: column;
+}
+
+@each $key, $value in $justify-content {
+  .just-cont-#{$key} {
+    justify-content: $value !important;
+  }
+}
+
+@each $key, $value in $align-items {
+  .al-it-#{$key} {
+    align-items: $value !important;
+  }
+}

@@ -3,6 +3,7 @@
 @use "utils/cursor/cursor";
 @use "utils/colors/colors" as colors;
 @use "utils/fonts/fonts";
+@use "utils/display/display";
 
 nextjs-portal {
   display: none !important;
