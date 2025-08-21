@@ -1,18 +1,23 @@
 import { ReactElement } from "react";
+import style from "./style/content.module.scss"
 
 type HeaderProps={
-  text?:string
+  text?:string;
+  icon?:string;
 }
 const Content = ({header, body}:{header:HeaderProps, body:ReactElement}) => {
-  return(
-    <section>
-      <div>
+  return (
+    <div className={style.content}>
+      <div className={style.header}>
         <h1>{header.text}</h1>
+        <h1>{header.icon}</h1>
       </div>
-      <div>
-        <h3>{body}</h3>
+      <div style={{padding:'0 2rem'}}>
+
+      <hr />
       </div>
-    </section>
+      <div className={style.body}>{body}</div>
+    </div>
   )
 }
 
