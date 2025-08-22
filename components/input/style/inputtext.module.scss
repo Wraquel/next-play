@@ -3,9 +3,18 @@
   flex-direction: column;
   padding-bottom: var(--unit-3) ;
   & input {
-    padding: var(--unit-1);
+    padding:  var(--unit-1) 0;
+    padding-left: var(--unit-1) ;
     background:none;
     border: none;
     border-bottom: solid 1px rgb(132, 126, 126);
+    color: var(--neutral-color);
+    font-size: medium;
+    &:focus {
+      outline: none;
+      border-bottom: solid 1px rgb(255, 255, 255);
+      outline-offset: 0.1rem;
+    }   
   }
+  
 }
