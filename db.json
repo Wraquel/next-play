@@ -3,13 +3,13 @@
     {
       "id": 1,
       "name": "Maria",
-      "email": "maria@mail.com",
+      "email": "mariasilva@mail.com",
       "newsletter": true
     },
     {
       "id": 2,
       "name": "Joao",
-      "email": "joao@mail.com",
+      "email": "joaosilva@mail.com",
       "newsletter": false
     }
   ]
