@@ -2,14 +2,14 @@
   "users": [
     {
       "id": 1,
-      "name": "Raquel",
-      "email": "kel@mail.com",
+      "name": "Maria",
+      "email": "maria@mail.com",
       "newsletter": true
     },
     {
       "id": 2,
-      "name": "Jean",
-      "email": "jean@mail.com",
+      "name": "Joao",
+      "email": "joao@mail.com",
       "newsletter": false
     }
   ]
