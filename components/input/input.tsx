@@ -5,10 +5,11 @@ type InputProps = {
   label?: string;
   type?: string;
   error?: string;
+  placeholder?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, label, error, ...props }, ref) => {
+  ({ type, label, error, placeholder, ...props }, ref) => {
     if (type === "checkbox") {
       return (
         <div className="d-flex">
@@ -20,7 +21,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className={style.input}>
         <label>{label}</label>
-        <input ref={ref} type={type} {...props} />
+        <input ref={ref} placeholder={placeholder} type={type} {...props} />
         {error && (
           <span>
             <small style={{ color: "red" }}>{error}</small>

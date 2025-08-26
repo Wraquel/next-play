@@ -1,0 +1,21 @@
+$spinner-size: 48px;
+$spinner-stroke: 4px;
+$spinner-color: #4f46e5;  
+$spinner-track: #e5e7eb;
+$spinner-speed: 0.75s;
+
+@keyframes spin {
+to {
+transform: rotate(360deg);
+}
+}
+
+.loading {
+margin: var(--unit-2) 0;
+width: $spinner-size;
+height: $spinner-size;
+border-radius: 50%;
+border: $spinner-stroke solid $spinner-track;
+border-top-color: $spinner-color;
+animation: spin $spinner-speed linear infinite;
+}

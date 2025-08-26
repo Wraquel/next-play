@@ -1,32 +1,73 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-// import type { RootState } from "../store";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createUser, fetchUsers } from "@/services/user";
 
-export interface User {
+type UserType = {
+  id?: string;
   name: string;
   email: string;
   newsletter: boolean;
 }
 
-type UserState = {
-  user: User | null;
+type ListUsersInitialState = {
+  listUsers: UserType[];
+  newUser: UserType | null;
+  loading: boolean;
+  error: string | null;
+}
+
+const initialState: ListUsersInitialState = {
+  listUsers: [],
+  newUser: null,
+  loading: false,
+  error: null,
 };
 
-const initialState: UserState = {
-  user: null,
-};
+export const addUser = createAsyncThunk("user/addUser", async (user: UserType) => {
+  return await createUser(user);
+});
+
+export const getUsers = createAsyncThunk("user/getUsers", async () => {
+  return await fetchUsers();
+});
 
 const userSlice = createSlice({
-  name: "user",
+  name: "users",
   initialState,
   reducers: {
-    setUser: (state, action: PayloadAction<User>) => {
-      state.user = action.payload;
-    },
-    clearUser: (state) => {
-      state.user = null;
-    },
+    setUser: (state, action: PayloadAction<UserType>) => {
+      state.newUser = action.payload;
+  }},
+  extraReducers: (builder) => {
+    builder
+      // addUser
+      .addCase(addUser.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(addUser.fulfilled, (state, action: PayloadAction<UserType>) => {
+        state.loading = false;
+        state.listUsers.push(action.payload);
+      })
+      .addCase(addUser.rejected, (state) => {
+        state.loading = false;
+        state.error = "Error";
+      })
+
+      // getUsers
+      .addCase(getUsers.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(getUsers.fulfilled, (state, action: PayloadAction<UserType[]>) => {
+        state.loading = false;
+        state.listUsers = action.payload;
+      })
+      .addCase(getUsers.rejected, (state) => {
+        state.loading = false;
+        state.error = "Error";
+      });
   },
 });
 
-export const { setUser, clearUser } = userSlice.actions;
+export const {setUser} = userSlice.actions;
+
 export default userSlice.reducer;
+
