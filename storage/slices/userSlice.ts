@@ -1,12 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { createUser, fetchUsers } from "@/services/user";
-
-type UserType = {
-  id?: string;
-  name: string;
-  email: string;
-  newsletter: boolean;
-}
+import { UserType} from "@/utils/user";
 
 type ListUsersInitialState = {
   listUsers: UserType[];
@@ -21,7 +15,6 @@ const initialState: ListUsersInitialState = {
   loading: false,
   error: null,
 };
-
 export const addUser = createAsyncThunk("user/addUser", async (user: UserType) => {
   return await createUser(user);
 });
@@ -56,7 +49,7 @@ const userSlice = createSlice({
       .addCase(getUsers.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getUsers.fulfilled, (state, action: PayloadAction<UserType[]>) => {
+      .addCase(getUsers.fulfilled, (state, action) => {
         state.loading = false;
         state.listUsers = action.payload;
       })

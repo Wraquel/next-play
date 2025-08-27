@@ -6,12 +6,8 @@ import Content from "../../components/content/content";
 import Button from "@/components/button";
 import Input from "@/components/input/input";
 import Loading from "@/components/loader";
+import { UserType } from "@/utils/user";
 
-type UserInputs = {
-  name: string;
-  email: string;
-  newsletter: boolean;
-};
 const Register = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.users);
@@ -24,9 +20,9 @@ const Register = () => {
     watch,
     reset,
     formState: { errors },
-  } = useForm<UserInputs>();
+  } = useForm<UserType>();
 
-  const onSubmit: SubmitHandler<UserInputs> = (data) => {
+  const onSubmit: SubmitHandler<UserType> = (data) => {
     dispatch(addUser(data));
     dispatch(setUser(data));
   };
