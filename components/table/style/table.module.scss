@@ -1,0 +1,12 @@
+.table{
+    border-spacing: 0;
+    border: solid var(--primary-color);
+    text-align:center;
+    & thead{
+      background-color: var(--primary-color);
+    }
+    & td{
+      padding: var(--unit-1) 0;
+      border-right:solid var(--primary-color);
+    }
+  }

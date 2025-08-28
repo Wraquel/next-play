@@ -4,7 +4,6 @@ const BASE_URL = "http://localhost:8000";
 
 // POST
 export const createUser = async (user: UserType): Promise<UserType> => {
-  await new Promise(resolve => setTimeout(resolve, 1000))
   const response = await fetch(`${BASE_URL}/users`, {
     method: "POST",
     headers: {

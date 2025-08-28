@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/storage/hooks";
-import { addUser, setUser, getUsers } from "@/storage/slices/userSlice";
+import { addUser, setUser, getUsers,clearUser } from "@/storage/slices/userSlice";
 import Content from "../../components/content/content";
 import Button from "@/components/button";
 import Input from "@/components/input/input";
@@ -30,6 +30,7 @@ const Register = () => {
 
   useEffect(() => {
     dispatch(getUsers());
+    dispatch(clearUser());
   }, [dispatch]);
   return (
     <Content
@@ -44,16 +45,17 @@ const Register = () => {
                 <form onSubmit={handleSubmit(onSubmit)}>
                   <Input
                     type="text"
-                    placeholder="name..."
                     label="name"
                     {...register("name", { required: "field required" })}
                     error={errors.name?.message}
                   />
                   <Input
                     type="text"
-                    placeholder="email..."
                     label="email"
-                    {...register("email", { required: "field required" })}
+                    {...register("email", { required: "field required", pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,  
+                      message: "invalid email address",
+                      }, })}
                     error={errors.email?.message}
                   />
                   <div className="d-flex al-it-center just-cont-space-between">
@@ -70,13 +72,13 @@ const Register = () => {
                         : "receive newsletter ❌"}
                     </h3>
                     <div className=" d-flex direction-col pad-1">
-                      <div style={{ marginBottom: "1rem" }}>
+                      {/* <div style={{ marginBottom: "1rem" }}>
                         <Button
                           type="submit"
                           label="reset"
                           onClick={() => reset()}
                         />
-                      </div>
+                      </div> */}
                       <Button type="submit" label="save" />
                     </div>
                   </div>
