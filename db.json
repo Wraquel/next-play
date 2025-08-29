@@ -35,6 +35,12 @@
       "name": "Tester",
       "email": "raquel.wetzel@aa.com",
       "newsletter": true
+    },
+    {
+      "id": "d982",
+      "name": "tester",
+      "email": "raquelwetzel@gmail.com",
+      "newsletter": false
     }
   ]
 }

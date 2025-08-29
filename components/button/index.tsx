@@ -1,4 +1,4 @@
-import { forwardRef, ReactNode } from "react";
+import { forwardRef, ReactNode,memo } from "react";
 import style from "./style/button.module.scss";
 
 type ButtonProps = {
@@ -19,4 +19,4 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 
 Button.displayName = "Button";
 
-export default Button;
+export default memo(Button);

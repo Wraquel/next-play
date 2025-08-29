@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef,memo } from "react";
 import style from "./style/inputtext.module.scss";
 
 type InputProps = {
@@ -57,4 +57,4 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
-export default Input;
+export default memo(Input);
