@@ -10,7 +10,7 @@ type InputProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, label, error, placeholder, value, onChange, ...props }, ref) => {
+  ({ type, label, error, placeholder, value,...props }, ref) => {
     switch (type) {
       case "checkbox":
         return (
@@ -29,7 +29,6 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
                 alignSelf: "end",
               }}
               className={style.search}
-              onChange={onChange}
               value={value}
               placeholder={placeholder}
               type={type}

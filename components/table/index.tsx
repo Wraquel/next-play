@@ -4,16 +4,17 @@ import { useState } from "react";
 import style from "./style/table.module.scss";
 
 type Column = {
-  id: number;
+  key: string;
   title: string;
 };
 
 type TableProps = {
   columns: Column[];
   rows: UserType[];
+  filter?:boolean;
 };
 
-const Table = ({ columns, rows }: TableProps) => {
+const Table = ({ columns, rows, ...props }: TableProps) => {
   const [queryName, setQueryName] = useState("");
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
@@ -21,47 +22,46 @@ const Table = ({ columns, rows }: TableProps) => {
   }
 
   const filteredUsers = rows.filter((row) =>
-    [row.name].some((f) =>
+    [row.name, row.email].some((f) =>
       f.toLocaleLowerCase().includes(queryName.toLocaleLowerCase())
     )
   );
 
   return (
-    <div className="d-flex direction-col">
-      {rows.length & filteredUsers.length  ? (
-        <table className={style.table}>
+    <div className="d-flex direction-col ">
+      <table className={style.table}>
         <thead>
-          <tr>
+          <tr className="columns">
             {columns.map((col) => (
-              <th key={col.id}>{col.title}</th>
+              <th className="col-4" key={col.key} style={{textAlign:"center"}}>{col.title}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {filteredUsers.map((user) => (
-            <tr key={user.id}>
-              <td>{user.name}</td>
-              <td style={{ textTransform: "none" }}>{user.email}</td>
-              <td style={{ borderRight: "none" }}>
+            <tr className="columns" key={user.id}>
+              <td className="col-4">{user.name}</td>
+              <td className="col-4"style={{ textTransform: "none" }}>{user.email}</td>
+              <td className="col-4" style={{ borderRight: "none" }}>
                 {user.newsletter ? "✅" : "❌"}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      ):(
-        <div className="container"><h3>No users found 🤨</h3></div>
+      {(rows.length == 0 || filteredUsers.length == 0) && (
+        <div className={style.noFound}>
+          <h3>No users found 🤨</h3>
+        </div>
       )}
-     {rows.length !=0 && (
-      <div className="d-flex direction-col al-it-center">
+      {(props.filter && rows.length != 0) && (
         <Input
           type="search"
           placeholder="search name"
           value={queryName}
           onChange={handleSearch}
         />
-      </div>
-     )} 
+      )}
     </div>
   );
 };

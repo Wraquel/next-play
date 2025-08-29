@@ -1,16 +1,40 @@
 {
   "users": [
     {
-      "id": 1,
-      "name": "Maria",
-      "email": "mariasilva@mail.com",
+      "id": "ea6e",
+      "name": "zsssdsdssa",
+      "email": "raquelwetzel@gmail.com",
       "newsletter": true
     },
     {
-      "id": 2,
-      "name": "Joao",
-      "email": "joaosilva@mail.com",
+      "id": "4019",
+      "name": "sdfsdf",
+      "email": "raquelwetzel@gmail.com",
       "newsletter": false
+    },
+    {
+      "id": "e713",
+      "name": "sdfsdf",
+      "email": "raquelwetzel@gmail.com",
+      "newsletter": true
+    },
+    {
+      "id": "a4c8",
+      "name": "sdfsdf",
+      "email": "raquelwetzel@gmail.com",
+      "newsletter": true
+    },
+    {
+      "id": "e590",
+      "name": "Raquel",
+      "email": "raquelwetzel@gmail.com",
+      "newsletter": true
+    },
+    {
+      "id": "ba98",
+      "name": "Tester",
+      "email": "raquel.wetzel@aa.com",
+      "newsletter": true
     }
   ]
 }
