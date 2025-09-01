@@ -1,4 +1,4 @@
-import React, { memo  } from "react";
+import React, { memo, useCallback  } from "react";
 import { SubmitHandler, useForm, FormProvider, useFormContext, useWatch } from "react-hook-form";
 import { useAppDispatch, useAppSelector } from "@/storage/hooks";
 import {
@@ -11,13 +11,9 @@ import Input from "@/components/input/input";
 import Loading from "@/components/loader";
 import { UserType } from "@/utils/user";
 
-
-const testeStyle = { paddingTop: "1rem", alignSelf: "end" };
-
 export const Newsletter = memo(() => {
-  const { control, register } = useFormContext<UserType>(); //analyze a better or easier solution
+  const {register } = useFormContext<UserType>(); 
   const newsletter = useWatch({
-    control,
     name:"newsletter",
     defaultValue:false});
   return (
@@ -26,14 +22,15 @@ export const Newsletter = memo(() => {
         <Input type="checkbox" label="newsletter" {...register("newsletter")} />
       </div>
       <div className="d-flex direction-col al-it-center">
-        <h3 style={{ padding: "1rem 0" }}>
+        <h3 className="pad-top-1 pad-bottom-1">
           {newsletter ? "receive newsletter ✅" : "receive newsletter ❌"}
         </h3>
       </div>
     </>
   );
 });
-Newsletter.displayName = "Newsletter"; // why necessary?
+Newsletter.displayName = "Newsletter"; 
+
 const Form = () => {
   const dispatch = useAppDispatch();
   const form = useForm<UserType>();
@@ -44,7 +41,6 @@ const Form = () => {
     dispatch(setUser(data));
   };
  
-
   // TO DO...EVERYTIME I start writing or full erase the input, the component re renders
   return (
     <FormProvider {...form}> 
@@ -60,10 +56,10 @@ const Form = () => {
           label="email"
           {...form.register("email", {
             required: "field required",
-            pattern: {
-              value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-              message: "invalid email address",
-            },
+            // pattern: {
+            //   value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+            //   message: "invalid email address",
+            // },
           })}
           error={form.formState.errors.email?.message}
         />
@@ -79,25 +75,12 @@ const Form = () => {
 };
 
 const Register = () => {
-  // const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.users);
-  const usersList = data.listUsers;   // think better about it... newUser might be not needed
+  const data = useAppSelector((state) => state.users);  
   const newUser = data.newUser;
   const loading = data.loading;
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   formState: { errors },
-  // } = useForm<UserType>();
 
-  // const onSubmit: SubmitHandler<UserType> = (data) => {
-  //   dispatch(addUser(data));
-  //   dispatch(setUser(data));
-  // };
-
-  function handleClick() {
-    console.log("Users______", usersList); //call if its needed
-  }
+  
+  const handleClick = useCallback(()=> console.log("User______", newUser),[newUser])
 
   return (
     <Content
@@ -107,22 +90,22 @@ const Register = () => {
           {loading ? (
             <Loading />
           ) : (
-            <div className="d-flex direction-col">
+            <div>
               <Form />
-              <hr />
             </div>
-            // display if the response ok from BE ____IT NEEDS TO BE OUTIDE THE LOADING PROBABLY
+            // display if the response ok from BE 
             // <div className="container">
             //   <span className="d-flex direction-col al-it-center">
             //     user successfully registered
             //   </span>
             // </div>
           )}
-          <div style={testeStyle}>
+          <hr />
+          <div className="d-flex direction-col al-it-end pad-top-1">
             <Button
               type="button"
               disabled={!newUser}
-              label="get list of users"
+              label="get newUser"
               onClick={handleClick}
             />
           </div>

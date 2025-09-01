@@ -16,7 +16,7 @@ const initialState: ListUsersInitialState = {
   error: null,
 };
 export const addUser = createAsyncThunk("user/addUser", async (user: UserType) => {
-  return await createUser(user);
+  return await createUser(user); 
 });
 
 export const getUsers = createAsyncThunk("user/getUsers", async () => {
