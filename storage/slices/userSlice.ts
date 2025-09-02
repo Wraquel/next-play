@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import { createUser, fetchUsers } from "@/services/user";
+import { showToast } from "./toastSlice";
 import { UserType} from "@/utils/user";
 
 type ListUsersInitialState = {
@@ -15,12 +16,20 @@ const initialState: ListUsersInitialState = {
   loading: false,
   error: null,
 };
-export const addUser = createAsyncThunk("user/addUser", async (user: UserType) => {
-  return await createUser(user); 
+export const addUser = createAsyncThunk("user/addUser", async (user: UserType, {rejectWithValue, dispatch}) => {
+  try{
+    const response = await createUser(user); 
+    dispatch(showToast({ variant: "success", message: "Success" }));
+    return response
+  } catch(error) {
+    const message = error
+    // dispatch(showToast({ variant: "error", message }));
+    return rejectWithValue(message)
+  } 
 });
 
 export const getUsers = createAsyncThunk("user/getUsers", async () => {
-  return await fetchUsers();
+  return await fetchUsers(); 
 });
 
 const userSlice = createSlice({

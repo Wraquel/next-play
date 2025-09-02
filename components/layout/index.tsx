@@ -4,6 +4,7 @@ import { Routes } from "@/utils/routes/index";
 import Navbar from "../navbar";
 import Button from "../button";
 import Main from "../main";
+import Toast from "../toast";
 
 type LayoutProps = {
   children: ReactElement;
@@ -35,6 +36,7 @@ const Layout = ({ children }: LayoutProps) => {
     <>
       <Navbar>{buttonsToShow}</Navbar>
       <Main>{children}</Main>
+      <Toast />
     </>
   );
 };
