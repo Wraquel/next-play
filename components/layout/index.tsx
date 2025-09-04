@@ -4,7 +4,7 @@ import { Routes } from "@/utils/routes/index";
 import Navbar from "../navbar";
 import Button from "../button";
 import Main from "../main";
-import Toast from "../toast";
+import Toast from "../toasts";
 
 type LayoutProps = {
   children: ReactElement;

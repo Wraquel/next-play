@@ -10,16 +10,24 @@
   flex-flow: column;
   justify-content: flex-end;
   align-items: center;
-  .toast {
+  >.toast {
     text-align: center;
     border-radius: var(--unit-1);
     padding: var(--unit-2);
-    background-color: red;
     flex: none;
     min-width: 15rem;
     width: fit-content;
     pointer-events: all;
     overflow: hidden;
+    &.warning{
+      background-color: rgb(214, 106, 5);
+    }
+    &.success{
+      background-color: rgb(25, 192, 33);
+    }
+    &.error{
+      background-color: rgb(212, 66, 47);
+    }
     &::after {
       position: absolute;
       content: "";

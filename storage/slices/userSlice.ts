@@ -19,11 +19,14 @@ const initialState: ListUsersInitialState = {
 export const addUser = createAsyncThunk("user/addUser", async (user: UserType, {rejectWithValue, dispatch}) => {
   try{
     const response = await createUser(user); 
-    dispatch(showToast({ variant: "success", message: "Success" }));
+    if(response){
+      dispatch(showToast({ variant: "success", message: "Success", autoClose:true }));
+      dispatch(showToast({ variant: "warning", message: "You will not receive Newsletter", autoClose:false }));
+    }
     return response
   } catch(error) {
     const message = error
-    // dispatch(showToast({ variant: "error", message }));
+    dispatch(showToast({ variant: "error", message:"ERROR", autoClose:true }));
     return rejectWithValue(message)
   } 
 });

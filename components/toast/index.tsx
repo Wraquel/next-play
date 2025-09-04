@@ -1,10 +1,8 @@
-import { useAppDispatch, useAppSelector } from "@/storage/hooks";
-import style from "./style/toast.module.scss"
-import { memo} from "react"
+// import style from "../toasts/style/toasts.module.scss"
 
-export type ToastVariants = "brand" | "error" | "success" | "warning";
+export type ToastVariants = "error" | "success" | "warning";
 export interface ToastProps {
-  className?: string;
+  className?: string; 
   variant?: ToastVariants;
   message?: string;
   onHover?: () => void;
@@ -12,18 +10,12 @@ export interface ToastProps {
   closeHandler?: () => void;
 }
 //if toasts not null or 0 return, else return null
-const Toast= () => {
-  // const dispatch =useAppDispatch();
-  const toasts = useAppSelector((state) => Object.values(state.toasts));
-  if(!toasts?.length ) return null
+const Toast = ({message, variant, className}:ToastProps) => {
+  //passar props
   return (
-   <div className={style.toasts}>
-    {toasts.map(t => (
-      <div key={t.id} className={style.toast}>
-        <h2>{t.message}</h2>
+      <div className={className}>
+        <h2>{message}</h2>
       </div>
-    ))}
-   </div>
   );
 };
-export default memo(Toast);
+export default Toast;
