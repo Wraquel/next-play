@@ -9,12 +9,16 @@ export interface ToastProps {
   onExit?: () => void;
   closeHandler?: () => void;
 }
-//if toasts not null or 0 return, else return null
-const Toast = ({message, variant, className}:ToastProps) => {
-  //passar props
+const Toast = ({message, variant, className, closeHandler, onHover, onExit}:ToastProps) => { 
+  if (typeof message !== "string") return null; 
   return (
-      <div className={className}>
-        <h2>{message}</h2>
+      <div className={className} onMouseEnter={onHover} onMouseLeave={onExit}>
+        <div className="d-flex direction-col al-it-end">
+          <button type="button" className="c-pointer" onClick={closeHandler}>
+            <span className="c-pointer">✕</span>
+          </button>
+        </div>
+        <h2 className="pad-1">{message}</h2>
       </div>
   );
 };

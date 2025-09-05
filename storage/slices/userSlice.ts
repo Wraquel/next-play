@@ -20,7 +20,8 @@ export const addUser = createAsyncThunk("user/addUser", async (user: UserType, {
   try{
     const response = await createUser(user); 
     if(response){
-      dispatch(showToast({ variant: "success", message: "Success", autoClose:true }));
+      dispatch(showToast({ variant: "success", message: "Success"}));
+      // dispatch(showToast({ variant: "success", message: "Success"}));
       dispatch(showToast({ variant: "warning", message: "You will not receive Newsletter", autoClose:false }));
     }
     return response
