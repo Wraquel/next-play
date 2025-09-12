@@ -1,4 +1,4 @@
-// import style from "../toasts/style/toasts.module.scss"
+import style from "./style/toast.module.scss"
 
 export type ToastVariants = "error" | "success" | "warning";
 export interface ToastProps {
@@ -13,12 +13,14 @@ const Toast = ({message, variant, className, closeHandler, onHover, onExit}:Toas
   if (typeof message !== "string") return null; 
   return (
       <div className={className} onMouseEnter={onHover} onMouseLeave={onExit}>
-        <div className="d-flex direction-col al-it-end">
-          <button type="button" className="c-pointer" onClick={closeHandler}>
-            <span className="c-pointer">✕</span>
+        <div className={style.toastContent}>
+          <button type="button" onClick={closeHandler}>
+            <span className="c-pointer">X</span>
           </button>
+          <div>
+            <h2 className="pad-1">{message}</h2>
+          </div>
         </div>
-        <h2 className="pad-1">{message}</h2>
       </div>
   );
 };

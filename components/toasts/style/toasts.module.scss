@@ -33,29 +33,6 @@
     &.error {
       background-color: rgb(212, 66, 47);
     }
-    &.exit {
-      animation: toast-out 0.3s ease forwards;
-    }
-    &::after {
-      position: absolute;
-      content: "";
-      width: 100%;
-      height: var(--unit-1);
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.25);
-      animation-name: close-duration;
-      animation-timing-function: ease-in;
-      animation-duration: 0.6s;
-    }
-  }
-}
-@keyframes close-duration {
-  0% {
-    width: 100%;
-  }
-  100% {
-    width: 0%;
   }
 }
 
@@ -67,16 +44,5 @@
   to {
     opacity: 1;
     transform: translateY(0);
-  }
-}
-
-@keyframes toast-out {
-  from {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  to {
-    opacity: 0;
-    transform: translateY(20px);
   }
 }
