@@ -1,12 +1,15 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import style from "./style/navbar.module.scss";
 import { Routes } from "@/utils/routes/index";
 import { useRouter } from "next/router";
+import profileModal from "@/pages/template/modals/profileModal";
+import Modal from "../modal";
 
 type NavProps = {
   children: ReactNode;
+  onClickProfile: () => void;
 };
-const Navbar = ({ children }: NavProps) => {
+const Navbar = ({ children, onClickProfile }: NavProps) => {
   const router = useRouter();
   return (
     <nav className={style.navbar}>
@@ -22,6 +25,13 @@ const Navbar = ({ children }: NavProps) => {
           </div>
           <div className="col-8">
             <div className={style.btns}>{children}</div>
+          </div>
+          <div className="col-2 ">
+            <div className={style.profile}>
+              <span onClick={onClickProfile}>
+                <h1>My Profile</h1>
+              </span>
+            </div>
           </div>
         </div>
       </div>

@@ -1,10 +1,11 @@
 import { useRouter } from "next/router";
-import { ReactElement } from "react";
+import { ReactElement, useRef } from "react";
 import { Routes } from "@/utils/routes/index";
 import Navbar from "../navbar";
 import Button from "../button";
 import Main from "../main";
-import Toast from "../toasts";
+import Toast from "../../pages/template/toasts";
+import Modal from "../../components/modal";
 
 type LayoutProps = {
   children: ReactElement;
@@ -12,7 +13,13 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
-
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const openModal = () => {
+    dialogRef.current?.showModal();
+  };
+  const closeModal = () => {
+    dialogRef.current?.close();
+  };
   const buttons = [{ name: "register" }, { name: "search" }, { name: "other" }];
 
   function handleButton(item: { name: string }) {
@@ -34,9 +41,13 @@ const Layout = ({ children }: LayoutProps) => {
   });
   return (
     <>
-      <Navbar>{buttonsToShow}</Navbar>
+      <Navbar onClickProfile ={openModal}>{buttonsToShow}</Navbar>
       <Main>{children}</Main>
       <Toast />
+      <Modal ref={dialogRef}
+      header={{ text: "Profile" }} 
+      body={<>Profile Modal Content</>}
+      onCloseProfile ={closeModal} />
     </>
   );
 };

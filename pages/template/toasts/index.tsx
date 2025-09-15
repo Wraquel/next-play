@@ -1,7 +1,7 @@
 import {memo} from "react"
 import { useAppSelector, useAppDispatch } from "@/storage/hooks";
 import { closeToast, freezeToast} from "@/storage/slices/toastSlice";
-import Toast  from "../toast";
+import Toast  from "../../../components/toast";
 import style from "./style/toasts.module.scss"
 
 const Toasts= () => {
