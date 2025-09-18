@@ -1,9 +1,8 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode } from "react";
 import style from "./style/navbar.module.scss";
 import { Routes } from "@/utils/routes/index";
 import { useRouter } from "next/router";
-import profileModal from "@/pages/template/modals/profileModal";
-import Modal from "../modal";
+import { useSession  } from "next-auth/react";
 
 type NavProps = {
   children: ReactNode;
@@ -11,6 +10,7 @@ type NavProps = {
 };
 const Navbar = ({ children, onClickProfile }: NavProps) => {
   const router = useRouter();
+  const { data: session } = useSession();
   return (
     <nav className={style.navbar}>
       <div className="container">
@@ -26,11 +26,10 @@ const Navbar = ({ children, onClickProfile }: NavProps) => {
           <div className="col-8">
             <div className={style.btns}>{children}</div>
           </div>
-          <div className="col-2 ">
+          <div className="col-2 c-pointer" onClick={onClickProfile}>
             <div className={style.profile}>
-              <span onClick={onClickProfile}>
-                <h1>My Profile</h1>
-              </span>
+                <h3>{session?.user?.name}</h3>
+                <span>👩🏻‍🦱</span>
             </div>
           </div>
         </div>

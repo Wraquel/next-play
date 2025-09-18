@@ -7,15 +7,16 @@ type InputProps = {
   error?: string;
   placeholder?: string;
   value?: string;
+  defaultValue?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, label, error, placeholder, value,...props }, ref) => {
+  ({ type, label, error, placeholder, value, defaultValue, checked, ...props }, ref) => {
     switch (type) {
       case "checkbox":
         return (
           <div className="d-flex">
-            <input ref={ref} type="checkbox" className="c-pointer" {...props} />
+            <input ref={ref} defaultChecked={checked} type="checkbox" className="c-pointer" {...props} />
             <label style={{ paddingLeft: ".5rem" }}>{label}</label>
           </div>
         );
@@ -40,7 +41,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         return (
           <div className={style.input}>
             <label>{label}</label>
-            <input ref={ref} placeholder={placeholder} type={type} {...props} />
+            <input ref={ref} placeholder={placeholder} type={type} {...props} defaultValue={defaultValue} />
             {error && (
               <span>
                 <small style={{ color: "red" }}>{error}</small>

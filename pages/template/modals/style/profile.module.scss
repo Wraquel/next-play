@@ -1,0 +1,30 @@
+.profile{
+  & .form{
+    padding: var(--unit-3) 0 ;
+    display: flex;
+    flex-direction: column;
+    gap: var(--unit-2);
+    text-transform: capitalize;
+    & .email{
+      div{
+        padding-bottom: var(--unit-1);
+      }
+      label{
+        padding-bottom: var(--unit-1);
+      }
+    }
+  }
+  & .data{
+    padding-top: var(--unit-1);
+    display: flex;
+    flex-direction: column;
+  }
+  & h1{
+    padding-bottom: var(--unit-1);
+  }
+  & .userId{
+    padding-bottom: var(--unit-1);
+    color: var(--secondary-color);
+    font-weight: bold;
+  }
+}

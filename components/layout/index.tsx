@@ -5,7 +5,7 @@ import Navbar from "../navbar";
 import Button from "../button";
 import Main from "../main";
 import Toast from "../../pages/template/toasts";
-import Modal from "../../components/modal";
+import ProfileModal from "@/pages/template/modals/profileModal";
 
 type LayoutProps = {
   children: ReactElement;
@@ -44,10 +44,7 @@ const Layout = ({ children }: LayoutProps) => {
       <Navbar onClickProfile ={openModal}>{buttonsToShow}</Navbar>
       <Main>{children}</Main>
       <Toast />
-      <Modal ref={dialogRef}
-      header={{ text: "Profile" }} 
-      body={<>Profile Modal Content</>}
-      onCloseProfile ={closeModal} />
+      <ProfileModal dialogRef={dialogRef} onCloseProfile={closeModal} />
     </>
   );
 };

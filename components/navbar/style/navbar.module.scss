@@ -18,6 +18,12 @@
 .profile{
   margin: 0 2rem;
   display: flex;
+  gap: var(--unit-1);
   justify-content: end;
   align-items: center;
+  & h3{
+    text-decoration-line: underline;
+    text-underline-offset: 2px;
+  }
+  
 }
