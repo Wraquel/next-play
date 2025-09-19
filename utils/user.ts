@@ -1,5 +1,5 @@
 export type UserType = {
-  id?: string;
+  id: string;
   name: string;
   email: string;
   newsletter: boolean;

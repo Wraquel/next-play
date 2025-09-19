@@ -1,12 +1,12 @@
 import Modal from '../../../components/modal';
-import { RefObject, useEffect, useState } from "react";
+import { RefObject, useState } from "react";
 import { useSession } from 'next-auth/react';
 import Button from '@/components/button';
 import Input from '@/components/input/input';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import { UserType } from '@/utils/user';
 import { Newsletter } from '@/components/newsletter';
-import { updateProfile, getUser } from '@/storage/slices/userSlice';
+import { updateProfile } from '@/storage/slices/userSlice';
 import { useAppDispatch,useAppSelector } from "@/storage/hooks";
 import Loading from '@/components/loader';
 import style from "./style/profile.module.scss";
@@ -20,23 +20,22 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
   const { data: session } = useSession();
   const form = useForm<UserType>();
   const dispatch = useAppDispatch();
-  const data = useAppSelector((state) => state.users);
+  const data = useAppSelector((state) => state.user);
   const user = data.user;
   const loading = data.loading;
 
-  useEffect(()=>{
-    if(session?.user?.id){
-      dispatch(getUser(session?.user?.id));
-    }
-  },[session, dispatch])
-  
-  function handleCancel() {
+  function handleClose() {
     onCloseProfile();
     setIsEditing(false);
   }
-  const onSubmit: SubmitHandler<UserType> = (data) => {
-    dispatch(updateProfile({ ...user, ...data, id: user?.id }));
+  function handleSaveAndClose(data: UserType, event?: React.BaseSyntheticEvent) {
+    onSubmit(data, event);
+    onCloseProfile();
     setIsEditing(false);
+  }
+  const onSubmit: SubmitHandler<UserType> = (data, event) => {
+    if (!user?.id) return
+    dispatch(updateProfile({ ...user, ...data, id: user?.id}));
   };
   return (
     <Modal ref={dialogRef}
@@ -52,8 +51,6 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
               </div>
             </div>
             <hr />
-          {loading ? (<Loading/>):
-          (<> 
             {isEditing ? (
               <FormProvider {...form}>
                 <form className={style.form}>
@@ -86,23 +83,25 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
                   <span>{user?.newsletter ? 'Subscribed' : 'Not Subscribed'}</span>
                 </div>
               </div>
-            )} </>
-          )}
+            )}
           </div>
         </div>
       }
       footer={
         <>
-          <Button disabled={isEditing} label="go back" onClick={handleCancel} />
-          {!isEditing && <Button label="edit" onClick={() => setIsEditing(true)} />}
+          {!isEditing && 
+          <>
+            <Button label="close" onClick={handleClose} />
+            <Button label="edit" onClick={() => setIsEditing(true)} />
+            </>}
           {isEditing && 
           <>
-            <Button label="cancel" onClick={() => setIsEditing(false)} />
-            <Button label="save" type="submit" onClick={form.handleSubmit(onSubmit)} />
+            <Button disabled={loading} label="cancel" onClick={() => setIsEditing(false)} />
+            <Button disabled={loading} label="save" type="submit" onClick={form.handleSubmit(onSubmit)} />
+            <Button disabled={loading} label="save & close" type="submit" onClick={form.handleSubmit(handleSaveAndClose)} />
           </>}
         </>
       }
-      onCloseProfile={onCloseProfile}
     />
   );
 };

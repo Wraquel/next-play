@@ -2,7 +2,7 @@ import Content from "@/components/content/content";
 import Loading from "@/components/loader";
 import Table from "@/components/table";
 import { useAppSelector, useAppDispatch } from "@/storage/hooks";
-import { getUsers } from "@/storage/slices/userSlice";
+import { getUsers } from "@/storage/slices/usersSlice";
 import { useEffect } from "react";
 
 const columns = [

@@ -1,7 +1,7 @@
 import React from "react";
 import { SubmitHandler, useForm, FormProvider} from "react-hook-form";
 import { useAppDispatch } from "@/storage/hooks";
-import {addUser} from "@/storage/slices/userSlice";
+import {addUser} from "@/storage/slices/usersSlice";
 import Button from "@/components/button";
 import Input from "@/components/input/input";
 import { UserType } from "@/utils/user";

@@ -1,9 +1,10 @@
 /* Open state of the dialog  */
 .dialog {
   dialog:open {
+    border: solid var(--neutral-color);
     opacity: 1;
     position: fixed;
-    top: 50%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
@@ -19,9 +20,10 @@
       justify-content: center;
       text-transform: capitalize;
       padding: var(--unit-2) var(--unit-4); 
-      color: #fff;
+      color: var(--neutral-color);
     }
     & .body{
+      background-color: var(--neutral-color);
       flex: 1 1 auto;
       overflow-y: auto;
       padding: var(--unit-1) var(--unit-1);
@@ -42,23 +44,22 @@
       }
     }
     dialog {
-      border: none;
       opacity: 0;
       transform: scaleY(0);
       transition:
         overlay 0.7s ease-out allow-discrete,
         display 0.7s ease-out allow-discrete;
     }
-    dialog::backdrop {
-      background-color: transparent;
-      transition:
-        display 0.7s allow-discrete,
-        overlay 0.7s allow-discrete,
-        background-color 0.7s;
-    }
-  
-    dialog:open::backdrop {
-      background-color: rgb(0 0 0 / 25%);
-    }
+  }
+  dialog::backdrop {
+    background-color: transparent;
+    transition:
+      display 0.7s allow-discrete,
+      overlay 0.7s allow-discrete,
+      background-color 0.7s;
+  }
+
+  dialog:open::backdrop {
+    background-color: rgb(0 0 0 / 25%);
   }
 }

@@ -1,9 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import users from "./slices/userSlice"
+import users from "./slices/usersSlice"
+import user from "./slices/userSlice"
 import toasts from "./slices/toastSlice"
 
 const slices = {
   users,
+  user,
   toasts
 };
 

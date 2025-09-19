@@ -14,11 +14,13 @@ const Toast = ({message, variant, className, closeHandler, onHover, onExit}:Toas
   return (
       <div className={className} onMouseEnter={onHover} onMouseLeave={onExit}>
         <div className={style.toastContent}>
+          <div className="col-11">
+            <h2 className="">{message}</h2>
+          </div>
+          <div className="col-1">
           <button type="button" onClick={closeHandler}>
             <span className="c-pointer">X</span>
           </button>
-          <div>
-            <h2 className="pad-1">{message}</h2>
           </div>
         </div>
       </div>
