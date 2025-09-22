@@ -1,5 +1,5 @@
 import style from "./style/modal.module.scss"
-import { forwardRef, ReactElement, useEffect } from "react";
+import { forwardRef, ReactElement } from "react";
 
 export interface HeaderProps {
   text?:string;
@@ -7,12 +7,10 @@ export interface HeaderProps {
 export interface ModalProps {
   header:HeaderProps, 
   body:ReactElement,
-  footer:ReactElement,
-  onCloseProfile: () => void
+  footer:ReactElement
 }
-const Modal = forwardRef<HTMLDialogElement, ModalProps>(({header, body, footer, onCloseProfile}, ref) => { 
-useEffect(()=>{
-}, [])
+const Modal = forwardRef<HTMLDialogElement, ModalProps>(({header, body, footer}, ref) => { 
+
   return (
     <div className={style.dialog}>
       <dialog ref={ref} >

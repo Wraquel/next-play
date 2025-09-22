@@ -8,6 +8,7 @@ import type { AppProps } from "next/app";
 import Loading from "@/components/loader";
 import GlobalLoginProvider from "@/components/login";
 import { SessionProvider} from "next-auth/react";
+import { ModalProvider } from "@/components/modal/modelContext";
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
   const children = <Component {...pageProps} />;
@@ -21,7 +22,9 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
         <Provider store={store}>
         <SessionProvider session={pageProps.session}>
           <GlobalLoginProvider>
+            <ModalProvider>
               <Layout>{children}</Layout>
+            </ModalProvider>
           </GlobalLoginProvider>
         </SessionProvider>
         </Provider>

@@ -3,12 +3,14 @@ import style from "./style/navbar.module.scss";
 import { Routes } from "@/utils/routes/index";
 import { useRouter } from "next/router";
 import { useSession  } from "next-auth/react";
+import { useModal } from "../modal/modelContext";
 
 type NavProps = {
   children: ReactNode;
-  onClickProfile: () => void;
+  onClickProfile?: () => void;
 };
 const Navbar = ({ children, onClickProfile }: NavProps) => {
+  const { openModal } = useModal();
   const router = useRouter();
   const { data: session } = useSession();
   return (
@@ -26,7 +28,7 @@ const Navbar = ({ children, onClickProfile }: NavProps) => {
           <div className="col-8">
             <div className={style.btns}>{children}</div>
           </div>
-          <div className="col-2 c-pointer" onClick={onClickProfile}>
+          <div className="col-2 c-pointer" onClick={() => openModal("profile")}>
             <div className={style.profile}>
                 <h3>{session?.user?.name}</h3>
                 <span>👩🏻‍🦱</span>

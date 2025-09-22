@@ -5,7 +5,6 @@ import Navbar from "../navbar";
 import Button from "../button";
 import Main from "../main";
 import Toast from "../../pages/template/toasts";
-import ProfileModal from "@/pages/template/modals/profileModal";
 
 type LayoutProps = {
   children: ReactElement;
@@ -13,13 +12,6 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
-  const dialogRef = useRef<HTMLDialogElement>(null);
-  const openModal = () => {
-    dialogRef.current?.showModal();
-  };
-  const closeModal = () => {
-    dialogRef.current?.close();
-  };
   const buttons = [{ name: "register" }, { name: "search" }, { name: "other" }];
 
   function handleButton(item: { name: string }) {
@@ -41,10 +33,9 @@ const Layout = ({ children }: LayoutProps) => {
   });
   return (
     <>
-      <Navbar onClickProfile ={openModal}>{buttonsToShow}</Navbar>
+      <Navbar >{buttonsToShow}</Navbar>
       <Main>{children}</Main>
       <Toast />
-      <ProfileModal dialogRef={dialogRef} onCloseProfile={closeModal} />
     </>
   );
 };
