@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 .container{
   width: 100%;
   padding: var(--unit-1) var(--unit-4);
@@ -13,6 +15,6 @@
 $grid-columns: 12;
 @for $i from 1 through $grid-columns {
   .col-#{$i} {
-    width: percentage($i / $grid-columns);
+    width: math.percentage(math.div($i, $grid-columns));
   }
 }

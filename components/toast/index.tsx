@@ -1,3 +1,4 @@
+import { memo } from "react";
 import style from "./style/toast.module.scss"
 
 export type ToastVariants = "error" | "success" | "warning";
@@ -26,4 +27,4 @@ const Toast = ({message, variant, className, closeHandler, onHover, onExit}:Toas
       </div>
   );
 };
-export default Toast;
+export default memo(Toast);

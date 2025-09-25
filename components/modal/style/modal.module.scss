@@ -33,7 +33,7 @@
     & .footer{
       flex-shrink: 0;
       display: flex;
-      justify-content: end;
+      justify-content: flex-end;
       flex-wrap: wrap;
       padding: var(--unit-1) var(--unit-4); 
       background-color: var(--secondary-color);

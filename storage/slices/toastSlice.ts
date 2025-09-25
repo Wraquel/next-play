@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction, createSelector } from "@reduxjs/toolkit";
 import { ToastProps } from "@/components/toast";
 import type { RootState } from "..";
 
@@ -70,6 +70,11 @@ const toastSlice = createSlice({
 });
 
 export const {closeToast} = toastSlice.actions;
+
+export const selectToastsArray = createSelector(
+  (state: RootState) => state.toasts.toasts,
+  (toastsObject) => Object.values(toastsObject)
+);
 
 export default toastSlice.reducer;
 
