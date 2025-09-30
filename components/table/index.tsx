@@ -1,5 +1,5 @@
 import { UserType } from "@/utils/user";
-import Input from "../input/input";
+import Input from "../input";
 import { useState } from "react";
 import style from "./style/table.module.scss";
 

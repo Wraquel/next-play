@@ -3,9 +3,10 @@ import { SubmitHandler, useForm, FormProvider} from "react-hook-form";
 import { useAppDispatch } from "@/storage/hooks";
 import {addUser} from "@/storage/slices/usersSlice";
 import Button from "@/components/button";
-import Input from "@/components/input/input";
+import Input from "@/components/input";
 import { UserType } from "@/utils/user";
 import { Newsletter} from "@/components/newsletter";
+import { generateElementId } from "@/utils/generateId";
 
 const Form = () => {
   const dispatch = useAppDispatch();
@@ -21,12 +22,14 @@ const Form = () => {
         <Input
           type="text"
           label="name"
+          id={generateElementId("register", "input", "name")}
           {...form.register("name", { required: "field required" })}
           error={form.formState.errors.name?.message}
         />
         <Input
           type="text"
           label="email"
+          id={generateElementId("register", "input", "email")}
           {...form.register("email", {
             required: "field required",
             pattern: {

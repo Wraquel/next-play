@@ -7,6 +7,7 @@ const GlobalLoginProvider = ({ children }: { children: ReactNode }) => {
   const dispatch = useAppDispatch();
   const { data: session } = useSession();
   const currentUser = useAppSelector((state) => state.user.user);
+  //to do if not find this Id make the first index user
   const userId = "4019";
 
   useEffect(() => {

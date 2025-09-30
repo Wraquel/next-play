@@ -10,20 +10,24 @@
   border-bottom-right-radius: var(--unit-1);
 }
 
-.btns{
+.buttons{
   display: flex;
   align-items: center;
   justify-content:space-between;
 }
-.profile{
-  margin: 0 2rem;
+
+.profileButton {
   display: flex;
   gap: var(--unit-1);
   justify-content: flex-end;
   align-items: center;
+  background: none;
+  border: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
   & h3{
     text-decoration-line: underline;
     text-underline-offset: 2px;
   }
-  
 }

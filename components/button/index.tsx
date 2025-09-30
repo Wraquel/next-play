@@ -8,9 +8,9 @@ type ButtonProps = {
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ type, children, label, ...props }, ref) => {
+  ({ type, children, label, id, ...props }, ref) => {
     return (
-      <button ref={ref} type={type} className={style.button} {...props}>
+      <button ref={ref} id={id} type={type || "button"} className={style.button} {...props}>
         {label ? label : children}
       </button>
     );

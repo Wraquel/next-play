@@ -1,6 +1,6 @@
 import React, { memo  } from "react";
 import { useFormContext, useWatch } from "react-hook-form";
-import Input from "@/components/input/input";
+import Input from "@/components/input";
 import { UserType } from "@/utils/user";
 
 type NewsletterProps = {

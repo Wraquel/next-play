@@ -2,6 +2,8 @@ import { forwardRef,memo } from "react";
 import style from "./style/inputtext.module.scss";
 
 type InputProps = {
+  id?: string;
+  name?: string;
   label?: string;
   type?: string;
   error?: string;
@@ -11,20 +13,20 @@ type InputProps = {
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ type, label, error, placeholder, value, defaultValue, checked, ...props }, ref) => {
+  ({ type, label, error, placeholder, value, defaultValue, checked, name, id,...props }, ref) => {
     switch (type) {
       case "checkbox":
         return (
           <div className="d-flex">
-            <input ref={ref} defaultChecked={checked} type="checkbox" className="c-pointer" {...props} />
-            <label style={{ paddingLeft: ".5rem" }}>{label}</label>
+            <input id={id} name={name} ref={ref} defaultChecked={checked} type="checkbox" className="c-pointer" {...props} />
+            <label htmlFor={id} style={{ paddingLeft: ".5rem" }}>{label}</label>
           </div>
         );
       case "search":
         return (
           <div className={style.input} style={{ alignSelf: "end" }}>
             <input
-              ref={ref}
+              id={id} name={name} ref={ref}
               style={{
                 border: "none",
                 alignSelf: "end",
@@ -40,8 +42,8 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       case "text":
         return (
           <div className={style.input}>
-            <label>{label}</label>
-            <input ref={ref} placeholder={placeholder} type={type} {...props} defaultValue={defaultValue} />
+            <label htmlFor={id}>{label}</label>
+            <input id={id} name={name} ref={ref} placeholder={placeholder} type={type} {...props} defaultValue={defaultValue} />
             {error && (
               <span>
                 <small style={{ color: "red" }}>{error}</small>
@@ -51,7 +53,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         );
       default:
         return (
-          <input ref={ref} placeholder={placeholder} type={type} {...props} />
+          <input id={id} name={name} ref={ref} placeholder={placeholder} type={type} {...props} />
         );
     }
   }

@@ -2,13 +2,12 @@ import Modal from '../../../components/modal';
 import { RefObject, useState } from "react";
 import { useSession } from 'next-auth/react';
 import Button from '@/components/button';
-import Input from '@/components/input/input';
+import Input from '@/components/input';
 import { FormProvider, useForm, SubmitHandler } from 'react-hook-form';
 import { UserType } from '@/utils/user';
 import { Newsletter } from '@/components/newsletter';
 import { updateProfile } from '@/storage/slices/userSlice';
 import { useAppDispatch,useAppSelector } from "@/storage/hooks";
-import Loading from '@/components/loader';
 import style from "./style/profile.module.scss";
 
 type ProfileModalProps = {
@@ -28,12 +27,16 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
     onCloseProfile();
     setIsEditing(false);
   }
+  function handleCancel() {
+    setIsEditing(false);
+    form.reset(); 
+  }
   function handleSaveAndClose(data: UserType, event?: React.BaseSyntheticEvent) {
     onSubmit(data, event);
     onCloseProfile();
     setIsEditing(false);
   }
-  const onSubmit: SubmitHandler<UserType> = (data, event) => {
+  const onSubmit: SubmitHandler<UserType> = (data) => {
     if (!user?.id) return
     dispatch(updateProfile({ ...user, ...data, id: user?.id}));
   };
@@ -96,7 +99,7 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
             </>}
           {isEditing && 
           <>
-            <Button disabled={loading} label="cancel" onClick={() => setIsEditing(false)} />
+            <Button disabled={loading} label="cancel" onClick={handleCancel} />
             <Button disabled={loading} label="save" type="submit" onClick={form.handleSubmit(onSubmit)} />
             <Button disabled={loading} label="save & close" type="submit" onClick={form.handleSubmit(handleSaveAndClose)} />
           </>}

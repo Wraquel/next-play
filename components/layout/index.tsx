@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ReactElement, useRef } from "react";
+import { ReactElement } from "react";
 import { Routes } from "@/utils/routes/index";
 import Navbar from "../navbar";
 import Button from "../button";
