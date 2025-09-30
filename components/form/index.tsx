@@ -39,10 +39,10 @@ const Form = () => {
           })}
           error={form.formState.errors.email?.message}
         />
-        <Newsletter/>
+        <Newsletter id={generateElementId("register", "checkbox", "newsletter")} />
         <div className="d-flex direction-col al-it-center">
           <div className=" d-flex direction-col pad-1">
-            <Button type="submit" label="save" />
+            <Button id={generateElementId("register", "button", "save")} type="submit" label="save" />
           </div>
         </div>
       </form>

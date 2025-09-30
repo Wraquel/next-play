@@ -5,6 +5,7 @@ import Navbar from "../navbar";
 import Button from "../button";
 import Main from "../main";
 import Toast from "../../pages/template/toasts";
+import { generateElementId } from "@/utils/generateId";
 
 type LayoutProps = {
   children: ReactElement;
@@ -27,7 +28,7 @@ const Layout = ({ children }: LayoutProps) => {
   const buttonsToShow = buttons.map((item) => {
     return (
       <div key={item.name}>
-        <Button onClick={() => handleButton(item)}>{item.name}</Button>
+        <Button id={generateElementId("navbar", "button", item.name)} onClick={() => handleButton(item)}>{item.name}</Button>
       </div>
     );
   });

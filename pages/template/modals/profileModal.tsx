@@ -9,6 +9,7 @@ import { Newsletter } from '@/components/newsletter';
 import { updateProfile } from '@/storage/slices/userSlice';
 import { useAppDispatch,useAppSelector } from "@/storage/hooks";
 import style from "./style/profile.module.scss";
+import { generateElementId } from '@/utils/generateId';
 
 type ProfileModalProps = {
   onCloseProfile: () => void;
@@ -72,7 +73,7 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
                     error={form.formState.errors.email?.message}
                     />
                     </div>
-                  <Newsletter value={user?.newsletter} showNotification />
+                  <Newsletter id={generateElementId("profile", "checkbox", "newsletter")} value={user?.newsletter} showNotification />
               </form> 
                 </FormProvider>
             ) : (
@@ -94,14 +95,14 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
         <>
           {!isEditing && 
           <>
-            <Button label="close" onClick={handleClose} />
-            <Button label="edit" onClick={() => setIsEditing(true)} />
+            <Button id={generateElementId("profile", "button", "close")} label="close" onClick={handleClose} />
+            <Button id={generateElementId("profile", "button", "edit")} label="edit" onClick={() => setIsEditing(true)} />
             </>}
           {isEditing && 
           <>
-            <Button disabled={loading} label="cancel" onClick={handleCancel} />
-            <Button disabled={loading} label="save" type="submit" onClick={form.handleSubmit(onSubmit)} />
-            <Button disabled={loading} label="save & close" type="submit" onClick={form.handleSubmit(handleSaveAndClose)} />
+            <Button id={generateElementId("profile", "button", "cancel")} disabled={loading} label="cancel" onClick={handleCancel} />
+            <Button id={generateElementId("profile", "button", "save")} disabled={loading} label="save" type="submit" onClick={form.handleSubmit(onSubmit)} />
+            <Button id={generateElementId("profile", "button", "saveAndClose")} disabled={loading} label="save & close" type="submit" onClick={form.handleSubmit(handleSaveAndClose)} />
           </>}
         </>
       }

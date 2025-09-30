@@ -6,8 +6,9 @@ import { UserType } from "@/utils/user";
 type NewsletterProps = {
   value?: boolean;
   showNotification?: boolean;
+  id: string;
 };
-export const Newsletter = memo(({value, showNotification}: NewsletterProps) => {
+export const Newsletter = memo(({value, showNotification, id}: NewsletterProps) => {
   const {register } = useFormContext<UserType>(); 
   const newsletter = useWatch({
     name:"newsletter", 
@@ -16,7 +17,7 @@ export const Newsletter = memo(({value, showNotification}: NewsletterProps) => {
   return (
     <>
       <div className="d-flex al-it-center just-cont-space-between">
-        <Input checked={value} type="checkbox" label="receive newsletter" {...register("newsletter")} />
+        <Input id={id} checked={value} type="checkbox" label="receive newsletter" {...register("newsletter")} />
       </div>
       {
         !showNotification && (

@@ -3,6 +3,7 @@ import style from "./style/button.module.scss";
 
 type ButtonProps = {
   children?: ReactNode;
+  id?: string;
   label?: string;
   type?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
