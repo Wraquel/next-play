@@ -13,7 +13,7 @@ const columns = [
 const Search = () => {
   const dispatch = useAppDispatch();
   const data = useAppSelector((state) => state.users);
-  const users = data.listUsers;
+  const users = Object.values(data.listUsers);
   const loading = data.loading;
 
   useEffect(() => {

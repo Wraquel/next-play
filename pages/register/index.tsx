@@ -3,7 +3,7 @@ import { useAppSelector } from "@/storage/hooks";
 import Content from "../../components/content/content";
 import Button from "@/components/button";
 import Loading from "@/components/loader";
-import Form from "@/components/form";
+import RegisterForm from "@/components/register";
 
 const Register = () => {
   const data = useAppSelector((state) => state.users);  
@@ -21,7 +21,7 @@ const Register = () => {
             <Loading />
           ) : (
             <div>
-              <Form />
+              <RegisterForm />
             </div>
           )}
           <hr />

@@ -33,16 +33,16 @@ const Table = ({ columns, rows, ...props }: TableProps) => {
         <thead>
           <tr className="columns">
             {columns.map((col) => (
-              <th className="col-4" key={col.key} style={{textAlign:"center"}}>{col.title}</th>
+              <th className="col-4" key={col.key}>{col.title}</th>
             ))}
           </tr>
         </thead>
         <tbody>
           {filteredUsers.map((user) => (
             <tr className="columns" key={user.id}>
-              <td className="col-4">{user.name}</td>
-              <td className="col-4"style={{ textTransform: "none" }}>{user.email}</td>
-              <td className="col-4" style={{ borderRight: "none" }}>
+              <td className="col-4" data-column="name">{user.name}</td>
+              <td className="col-4" data-column="email">{user.email}</td>
+              <td className="col-4" data-column="newsletter">
                 {user.newsletter ? "✅" : "❌"}
               </td>
             </tr>

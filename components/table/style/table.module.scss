@@ -4,11 +4,22 @@
   text-align:center;
   & thead{
     background-color: var(--primary-color);
+    & th{
+      text-align: center;
+    }
     }
   & td{
     padding: var(--unit-1) 0;
     border-right:solid var(--primary-color);
-    }
+    }   
+  & td[data-column="email"] {
+    text-transform: none;
+  }
+  
+  & td[data-column="newsletter"] {
+    border-right: none;
+  }
+  
   }
   .noFound{
     text-align: center; 
