@@ -18,19 +18,18 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
       case "checkbox":
         return (
           <div className="d-flex">
-            <input id={id} name={name} ref={ref} defaultChecked={checked} type="checkbox" className="c-pointer" {...props} />
-            <label htmlFor={id} style={{ paddingLeft: ".5rem" }}>{label}</label>
+            <label htmlFor={id} className={style.containerCheckbox}>
+              <input ref={ref} id={id} name={name} defaultChecked={checked} type="checkbox" {...props} />
+              <span className={style.checkmark}></span>
+            </label>
+            <span className="pad-l-2">{label}</span>
           </div>
         );
       case "search":
         return (
-          <div className={style.input} style={{ alignSelf: "end" }}>
+          <div className={style.input} >
             <input
               id={id} name={name} ref={ref}
-              style={{
-                border: "none",
-                alignSelf: "end",
-              }}
               className={style.search}
               value={value}
               placeholder={placeholder}

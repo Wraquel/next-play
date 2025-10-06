@@ -1,16 +1,63 @@
+.containerCheckbox {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.containerCheckbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+.checkmark {
+  border-radius: 0.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: var(--unit-2);
+  width: var(--unit-2);
+  background-color: #ffffff;
+}
+.containerCheckbox input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+.containerCheckbox input:checked ~ .checkmark:after {
+  display: block;
+}
+.containerCheckbox .checkmark:after {
+  left: 4px;
+  width: 5px;
+  height: 10px;
+  border: solid #ffffff;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
 .input {
   display: flex;
   flex-direction: column;
   padding-bottom: var(--unit-3);
   & input {
-    padding: var(--unit-1) 0;
-    padding-left: var(--unit-1);
+    padding: var(--unit-1) 0 var(--unit-1) var(--unit-1);
     font-size: medium;
     &:focus {
       outline: none;
     }
     &.search {
       margin-top: .2rem;
+      align-self: flex-end;
+      border: none;
       background-color:var(--primary-color);
       padding: 0.3rem;
       color: var(--contrast-color);
