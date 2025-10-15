@@ -10,6 +10,7 @@ import { updateProfile } from '@/storage/slices/userSlice';
 import { useAppDispatch,useAppSelector } from "@/storage/hooks";
 import style from "./style/profile.module.scss";
 import { generateElementId } from '@/utils/generateId';
+import Icons from '@/components/icon';
 
 type ProfileModalProps = {
   onCloseProfile: () => void;
@@ -23,6 +24,7 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
   const data = useAppSelector((state) => state.user);
   const user = data.user;
   const loading = data.loading;
+  const {edit} = Icons;
 
   function handleClose() {
     onCloseProfile();
@@ -43,7 +45,7 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
   };
   return (
     <Modal ref={dialogRef}
-      header={{ text: 'profile' }}
+      header={{ text: 'profile', icon: edit }}
       body={
         <div className="container">
           <div className={style.profile}>

@@ -1,7 +1,6 @@
 .containerCheckbox {
   display: block;
   position: relative;
-  cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -10,7 +9,6 @@
 .containerCheckbox input {
   position: absolute;
   opacity: 0;
-  cursor: pointer;
   height: 0;
   width: 0;
 }
@@ -22,6 +20,7 @@
   height: var(--unit-2);
   width: var(--unit-2);
   background-color: #ffffff;
+  cursor: pointer;
 }
 .containerCheckbox input:checked ~ .checkmark {
   background-color: #2196F3;

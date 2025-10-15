@@ -1,8 +1,10 @@
+import Icons from '@/components/icon';
 import Content from '../components/content/content'
 
 const Home = () => {
+  const {faceSmile} = Icons;
   return (
-    <Content header={{text:'playground home', icon:'🏡'}}
+    <Content header={{text:'playground home', icon:faceSmile}}
     body={
       <div className=''>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis minus ratione velit ducimus adipisci obcaecati

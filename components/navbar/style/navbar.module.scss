@@ -18,16 +18,19 @@
 
 .profileButton {
   display: flex;
-  gap: var(--unit-1);
   justify-content: flex-end;
-  align-items: center;
-  background: none;
-  border: none;
-  font: inherit;
-  color: inherit;
-  cursor: pointer;
-  & h3{
-    text-decoration-line: underline;
-    text-underline-offset: 2px;
+  button {
+    justify-content: flex-end;
+    display: flex;
+    gap: var(--unit-1);
+    align-items: center;
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+  }
+  :hover {
+    color: var(--neutral-color);
   }
 }

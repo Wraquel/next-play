@@ -2,6 +2,8 @@ import { UserType } from "@/utils/user";
 import Input from "../input";
 import { useState } from "react";
 import style from "./style/table.module.scss";
+import Icons from "../icon";
+
 
 type Column = {
   key: string;
@@ -16,6 +18,7 @@ type TableProps = {
 
 const Table = ({ columns, rows, ...props }: TableProps) => {
   const [queryName, setQueryName] = useState("");
+  const {xMark, checkMark} = Icons;
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setQueryName(e.target.value);
@@ -43,7 +46,7 @@ const Table = ({ columns, rows, ...props }: TableProps) => {
               <td className="col-4" data-column="name">{user.name}</td>
               <td className="col-4" data-column="email">{user.email}</td>
               <td className="col-4" data-column="newsletter">
-                {user.newsletter ? "✅" : "❌"}
+                {user.newsletter ? checkMark : xMark}
               </td>
             </tr>
           ))}

@@ -4,6 +4,7 @@ import Table from "@/components/table";
 import { useAppSelector, useAppDispatch } from "@/storage/hooks";
 import { getUsers } from "@/storage/slices/usersSlice";
 import { useEffect } from "react";
+import Icons from "@/components/icon";
 
 const columns = [
   { key: "name", title: "Name" },
@@ -15,6 +16,7 @@ const Search = () => {
   const data = useAppSelector((state) => state.users);
   const users = Object.values(data.listUsers);
   const loading = data.loading;
+  const {tableCell} = Icons;
 
   useEffect(() => {
     dispatch(getUsers());
@@ -22,7 +24,7 @@ const Search = () => {
 
   return (
     <Content
-      header={{ text: "search", icon: "🎲" }}
+      header={{ text: "search", icon: tableCell }}
       body={
         <>{loading ? <Loading /> : <Table filter columns={columns} rows={users} />}</>
       }

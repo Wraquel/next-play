@@ -3,7 +3,7 @@ import style from "./style/content.module.scss"
 
 type HeaderProps={
   text?:string;
-  icon?:string;
+  icon?:string | ReactElement;
 }
 const Content = ({header, body}:{header:HeaderProps, body:ReactElement}) => {
   return (

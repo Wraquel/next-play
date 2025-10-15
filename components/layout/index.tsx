@@ -6,6 +6,7 @@ import Button from "../button";
 import Main from "../main";
 import Toast from "../../pages/template/toasts";
 import { generateElementId } from "@/utils/generateId";
+import Icons from "../icon";
 
 type LayoutProps = {
   children: ReactElement;
@@ -13,8 +14,8 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
-  const buttons = [{ name: "register" }, { name: "search" }, { name: "other" }];
-
+  const buttons = [{ name: "home" },{ name: "register" }, { name: "search" }, { name: "other" }];
+  const {home} = Icons
   function handleButton(item: { name: string }) {
     if (item.name === "register") {
       router.push(Routes.REGISTER);
@@ -22,19 +23,29 @@ const Layout = ({ children }: LayoutProps) => {
       router.push(Routes.SEARCH);
     } else if (item.name === "other") {
       router.push(Routes.OTHER);
-    }
+    } 
   }
 
   const buttonsToShow = buttons.map((item) => {
+    const buttonProps = {
+      id: generateElementId("navbar", "button", item.name),
+      onClick: () => handleButton(item),
+      ...(item.name === "home" && { href: Routes.HOME})
+    };
+    
     return (
       <div key={item.name}>
-        <Button id={generateElementId("navbar", "button", item.name)} onClick={() => handleButton(item)}>{item.name}</Button>
+        {item.name === "home" ? (
+          <Button {...buttonProps}>{home}</Button>
+        ):(
+        <Button {...buttonProps}>{item.name}</Button>
+        )}
       </div>
     );
   });
   return (
     <>
-      <Navbar >{buttonsToShow}</Navbar>
+      <Navbar>{buttonsToShow}</Navbar>
       <Main>{children}</Main>
       <Toast />
     </>

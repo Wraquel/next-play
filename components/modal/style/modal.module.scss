@@ -17,7 +17,8 @@
     & .header{
       background-color: var(--secondary-color);
       display: flex;
-      justify-content: center;
+      align-items: center;
+      justify-content: space-between;
       text-transform: capitalize;
       padding: var(--unit-2) var(--unit-4); 
       color: var(--neutral-color);
@@ -60,6 +61,6 @@
   }
 
   dialog:open::backdrop {
-    background-color: rgb(0 0 0 / 25%);
+    background-color: rgb(0 0 0 / 50%);
   }
 }
