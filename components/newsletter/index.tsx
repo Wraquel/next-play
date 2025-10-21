@@ -16,7 +16,7 @@ export const Newsletter = memo(({value, showNotification, id}: NewsletterProps) 
     name:"newsletter", 
     defaultValue:value ? value: false
   });
-  const {xMark, checkMark} = Icons;
+  const {xMarkCustom, checkMark} = Icons;
   return (
     <>
       <div className="d-flex al-it-center just-cont-space-between">
@@ -30,7 +30,7 @@ export const Newsletter = memo(({value, showNotification, id}: NewsletterProps) 
               {newsletter ? (
                 <span>{checkMark}</span>
               ) : (
-                <span>{xMark}</span>
+                <span>{xMarkCustom}</span>
               )}
             </div>
           </div>

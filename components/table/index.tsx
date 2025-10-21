@@ -18,7 +18,7 @@ type TableProps = {
 
 const Table = ({ columns, rows, ...props }: TableProps) => {
   const [queryName, setQueryName] = useState("");
-  const {xMark, checkMark} = Icons;
+  const {xMarkCustom, checkMark} = Icons;
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     setQueryName(e.target.value);
@@ -46,7 +46,7 @@ const Table = ({ columns, rows, ...props }: TableProps) => {
               <td className="col-4" data-column="name">{user.name}</td>
               <td className="col-4" data-column="email">{user.email}</td>
               <td className="col-4" data-column="newsletter">
-                {user.newsletter ? checkMark : xMark}
+                {user.newsletter ? checkMark : xMarkCustom}
               </td>
             </tr>
           ))}

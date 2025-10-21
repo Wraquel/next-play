@@ -1,6 +1,6 @@
-/* Open state of the dialog  */
 .dialog {
   dialog:open {
+    z-index: 9999;
     border: solid var(--neutral-color);
     opacity: 1;
     position: fixed;
@@ -52,15 +52,16 @@
         display 0.7s ease-out allow-discrete;
     }
   }
-  dialog::backdrop {
-    background-color: transparent;
-    transition:
-      display 0.7s allow-discrete,
-      overlay 0.7s allow-discrete,
-      background-color 0.7s;
-  }
-
-  dialog:open::backdrop {
-    background-color: rgb(0 0 0 / 50%);
-  }
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(0 0 0 / 50%);
+  backdrop-filter: blur(1px);
+  z-index: 9997; 
+  pointer-events: auto; 
+  cursor: default;
 }

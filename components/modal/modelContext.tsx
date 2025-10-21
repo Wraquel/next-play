@@ -25,7 +25,7 @@ export const ModalProvider = ({children}: {children:React.ReactNode})=>{
 
   useEffect(() => {
     if (modalType.type && dialogRef.current) {
-      dialogRef.current.showModal();
+      dialogRef.current.show();
     }
   }, [modalType.type]);
 
