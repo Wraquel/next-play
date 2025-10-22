@@ -48,6 +48,8 @@ a {
   --secondary-color: #{colors.$secondary-color};
   --neutral-color: #{colors.$neutral-color};
   --contrast-color: #{colors.$contrast-color};
+  --error-color: #{colors.$error-color};
+  --success-color: #{colors.$success-color};
 
   // units
   --unit-1: 0.5rem;
