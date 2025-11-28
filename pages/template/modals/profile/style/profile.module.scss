@@ -1,0 +1,51 @@
+.profile{
+  & .form {
+    display: flex;
+    flex-direction: column;
+    text-transform: capitalize;
+    & .email{
+      padding-top: var(--unit-1);
+      padding-bottom: var(--unit-1);
+      div{
+        padding-top: var(--unit-1);
+        padding-bottom: var(--unit-1);
+      }
+      label{
+        padding-bottom: var(--unit-1);
+      }
+    }
+  }
+  & .userInfo{
+    padding: var(--unit-1) var(--unit-4) 0;
+    display: flex;
+    flex-direction: column;
+  }
+  & .data{
+    padding: var(--unit-1) var(--unit-4) var(--unit-4);
+    display: flex;
+    flex-direction: column;
+    height: 15vh;
+  }
+  & h1{
+    padding-bottom: var(--unit-1);
+  }
+  & .userId{
+    padding-bottom: var(--unit-1);
+    color: var(--secondary-color);
+    font-weight: bold;
+  }
+}
+.profileFooter {
+  margin-top: var(--unit-4);
+  display: flex;
+  flex-shrink: 0;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  padding: var(--unit-1) var(--unit-4); 
+  background-color: var(--secondary-color);
+  gap: var(--unit-2);
+  button{
+    font-size: medium;
+    padding: var(--unit-1) var(--unit-2);
+  }
+}

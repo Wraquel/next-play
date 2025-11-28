@@ -1,5 +1,5 @@
 import { createContext, useState, useContext, useRef, useEffect } from "react";
-import ProfileModal from "@/pages/template/modals/profileModal";
+import ProfileModal from "@/pages/template/modals/profile";
 
 type ModalType = "profile" | "settings";
 

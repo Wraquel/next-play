@@ -9,7 +9,7 @@ export interface HeaderProps {
 export interface ModalProps {
   header:HeaderProps, 
   body:ReactElement,
-  footer:ReactElement
+  footer?:ReactElement
 }
 const Modal = forwardRef<HTMLDialogElement, ModalProps>(({header, body, footer}, ref) => { 
   const {dialogRef } = useModal();
@@ -36,7 +36,7 @@ const Modal = forwardRef<HTMLDialogElement, ModalProps>(({header, body, footer},
           <span>{header.icon}</span>
         </div>
         <div className={style.body}>{body}</div>
-        <div className={style.footer}>{footer}</div>
+        {footer && <div className={style.footer}>{footer}</div>}
       </dialog> 
     </div>
     </>
