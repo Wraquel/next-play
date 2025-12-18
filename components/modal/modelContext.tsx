@@ -1,7 +1,7 @@
-import { createContext, useState, useContext, useRef, useEffect } from "react";
+import { createContext, useState, useContext, useRef, useEffect, useMemo, useCallback } from "react";
 import ProfileModal from "@/pages/template/modals/profile";
-
-type ModalType = "profile" | "settings";
+import MoreModal from "@/pages/template/modals/more";
+type ModalType = "profile" | "moreModal";
 
 type ModalContextType = {
   openModal: (type: ModalType) => void;
@@ -15,13 +15,13 @@ export const ModalProvider = ({children}: {children:React.ReactNode})=>{
   const [modalType, setModalType] = useState<{type: ModalType | null}>({type: null});
 
   const dialogRef = useRef<HTMLDialogElement>(null);
-  const openModal = (type: ModalType) => {
+  const openModal = useCallback((type: ModalType) => {
     setModalType({type})
-  };
-  const closeModal = () => {
+  }, []);
+  const closeModal = useCallback(() => {
     setModalType({type:null})
     dialogRef.current?.close();
-  };
+  }, []);
 
   useEffect(() => {
     if (modalType.type && dialogRef.current) {
@@ -29,10 +29,13 @@ export const ModalProvider = ({children}: {children:React.ReactNode})=>{
     }
   }, [modalType.type]);
 
+  const contextValue = useMemo(() => ({ openModal, closeModal, dialogRef }), [openModal, closeModal, dialogRef]);
+
   return(
-    <ModalContext.Provider value={{ openModal, closeModal, dialogRef }}>
+    <ModalContext.Provider value={contextValue}>
       {children}
       {modalType.type === "profile" && <ProfileModal dialogRef={dialogRef} onCloseProfile={closeModal} />}
+      {modalType.type === "moreModal" && <MoreModal dialogRef={dialogRef} onCloseMore={closeModal} />}
     </ModalContext.Provider>
   )
 }

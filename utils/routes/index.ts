@@ -2,7 +2,7 @@ enum Routes {
   HOME = "/",
   REGISTER = "/register",
   SEARCH = "/search",
-  OTHER = "/other",
+  MORE = "/more",
 }
 
 export { Routes };

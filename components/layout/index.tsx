@@ -14,16 +14,16 @@ type LayoutProps = {
 
 const Layout = ({ children }: LayoutProps) => {
   const router = useRouter();
-  const buttons = [{ name: "home" },{ name: "register" }, { name: "search" }, { name: "other" }];
+  const buttons = [{ name: "home" },{ name: "register" }, { name: "search" }, { name: "more" }];
   const {home} = Icons
   function handleButton(item: { name: string }) {
     if (item.name === "register") {
       router.push(Routes.REGISTER);
     } else if (item.name === "search") {
       router.push(Routes.SEARCH);
-    } else if (item.name === "other") {
-      router.push(Routes.OTHER);
-    } 
+    } else if (item.name === "more") {
+      router.push(Routes.MORE);
+    }
   }
 
   const buttonsToShow = buttons.map((item) => {
