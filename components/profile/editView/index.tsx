@@ -56,7 +56,7 @@ const EditView = ({ onCloseProfile, handleEdit }: ProfileModalProps) => {
             error={form.formState.errors.email?.message}
             />
         </div>
-        <Newsletter id={generateElementId("profile", "checkbox", "newsletter")} showNotification />
+        <Newsletter id={generateElementId("profile", "checkbox", "newsletter")} value={user?.newsletter} showNotification />
       </div>
     )
   }, [user?.email, form]);

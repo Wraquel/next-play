@@ -11,10 +11,10 @@ type NewsletterProps = {
 };
 
 export const Newsletter = memo(({value, showNotification, id}: NewsletterProps) => {
-  const {register } = useFormContext<UserType>(); 
+  const {register } = useFormContext<UserType>();
   const newsletter = useWatch({
     name:"newsletter", 
-    defaultValue:value ? value: false
+    defaultValue: value ?? false
   });
   const {xMarkCustom, checkMark} = Icons;
   return (
