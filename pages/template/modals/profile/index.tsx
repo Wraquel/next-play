@@ -18,21 +18,21 @@ const ProfileModal = ({ onCloseProfile, dialogRef }: ProfileModalProps) => {
     <Modal ref={dialogRef}
       header={{ text: 'profile', icon: edit }}
       body={
-          <div className={style.profile}>
-            <div className={style.userInfo}>
-              <h1>{session?.user?.name}</h1>
-              <div className={style.userId}>
-                <span>User ID: </span>
-                <span>{session?.user?.id}</span>
-              </div>
+        <div className={style.profile}>
+          <div className={style.userInfo}>
+            <h1>{session?.user?.name}</h1>
+            <div className={style.userId}>
+              <span>User ID: </span>
+              <span>{session?.user?.id}</span>
             </div>
-            <hr />
-            {isEditing ? (
-              <EditView onCloseProfile={onCloseProfile} handleEdit={setIsEditing} />
-            ) : (
-              <ViewMode onCloseProfile={onCloseProfile} handleEdit={setIsEditing} />
-            )}
           </div>
+          <hr />
+          {isEditing ? (
+            <EditView onCloseProfile={onCloseProfile} handleEdit={setIsEditing} />
+          ) : (
+            <ViewMode onCloseProfile={onCloseProfile} handleEdit={setIsEditing} />
+          )}
+        </div>
       }
     />
   );

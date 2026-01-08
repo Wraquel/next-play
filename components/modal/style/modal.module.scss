@@ -1,10 +1,11 @@
 .dialog {
   dialog:open {
+    // cursor: grab;
     z-index: 9999;
     border: solid var(--neutral-color);
     opacity: 1;
     position: fixed;
-    top: 40%;
+    top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 60%;
