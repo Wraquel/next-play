@@ -30,7 +30,6 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
     const dialog = dialogWrapper.current;
     if (!dialog) return;
     const headerRef = _ref.current;
-    const rect = dialog.getBoundingClientRect();
     document.body.style.position = 'relative';
     
     const maxX = window.innerWidth - dialog.offsetWidth;
@@ -42,6 +41,7 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
 
     const handleMouseDown = (event: MouseEvent) => {
       dragging = true;
+      const rect = dialog.getBoundingClientRect();
 
       dialog.style.left = `${rect.left}px`;
       dialog.style.top = `${rect.top}px`;
