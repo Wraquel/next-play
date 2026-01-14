@@ -1,12 +1,12 @@
 import style from "./style/modal.module.scss"
-import { forwardRef, ReactElement, use, useEffect, useId, useImperativeHandle, useRef} from "react";
+import { forwardRef, ReactElement, useEffect, useImperativeHandle, useRef} from "react";
 
 export interface HeaderProps {
   text?:string;
   icon?:string | ReactElement;
 }
 export interface ModalProps {
-  header:HeaderProps, 
+  header:HeaderProps,
   body:ReactElement,
   footer?:ReactElement
 }
@@ -16,49 +16,57 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
 
   useImperativeHandle(ref, () => dialogWrapper.current!);
 
+  const throttle = <CB extends (...args: unknown[]) => unknown, TimeInMs extends number>(cb: CB, limit?: TimeInMs) => {
+    let inThrottle: boolean = false;
+    return (...args: Parameters<CB>) => {
+      if (inThrottle) return
+      cb(...args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    };
+  };
+  
   useEffect(() => {
     const dialog = dialogWrapper.current;
+    if (!dialog) return;
     const headerRef = _ref.current;
-    const body = document.body;
-    if(dialog) body.style.position = 'relative';
+    const rect = dialog.getBoundingClientRect();
+    document.body.style.position = 'relative';
+    
+    const maxX = window.innerWidth - dialog.offsetWidth;
+    const maxY = window.innerHeight - dialog.offsetHeight;
 
     let dragging = false;
     let offsetX = 0;
     let offsetY = 0;
 
     const handleMouseDown = (event: MouseEvent) => {
-      if (dialog && event.target === headerRef) {
-        dragging = true;
-        const rect = dialog.getBoundingClientRect();
+      dragging = true;
 
-        dialog.style.left = `${rect.left}px`;
-        dialog.style.top = `${rect.top}px`;
+      dialog.style.left = `${rect.left}px`;
+      dialog.style.top = `${rect.top}px`;
 
-        dialog.style.transform = 'none';
+      dialog.style.transform = 'none';
 
-        offsetX = event.clientX - rect.left;
-        offsetY = event.clientY - rect.top;
-        
-      }
+      offsetX = event.clientX - rect.left;
+      offsetY = event.clientY - rect.top;
     };
 
     const handleMouseMove = (event: MouseEvent) => {
-      if (dragging && dialog) {
-        if (headerRef) headerRef.style.cursor = 'grabbing';
-        let x = event.clientX - offsetX;
-        let y = event.clientY - offsetY;
+      return throttle(() => {
+        if (dragging) {
+          if (headerRef) headerRef.style.cursor = 'grabbing';
+          let x = event.clientX - offsetX;
+          let y = event.clientY - offsetY;
+      
+          x = Math.max(0, Math.min(x, maxX));
+          y = Math.max(0, Math.min(y, maxY));
 
-        const maxX = window.innerWidth - dialog.offsetWidth;
-        const maxY = window.innerHeight - dialog.offsetHeight;
-
-        x = Math.max(0, Math.min(x, maxX));
-        y = Math.max(0, Math.min(y, maxY));
-
-        dialog.style.left = `${x}px`;
-        dialog.style.top = `${y}px`;
-      }
+          dialog.style.left = `${x}px`;
+          dialog.style.top = `${y}px`;
+        }
+      }, 20)();
     };
-
     const handleMouseUp = () => {
       dragging = false;
       if (headerRef) headerRef.style.cursor = 'move';
@@ -72,8 +80,8 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
-    }
-  }, [ref]);
+    };
+  }, []);
   return (
     <>
       <div className={style.backdrop} aria-hidden="true"/>
