@@ -1,5 +1,8 @@
 .dialog {
-
+  .resize {
+    cursor: nwse-resize;
+    background-color: transparent;
+  }
   dialog:open {
     z-index: 9999;
     border: solid var(--neutral-color);
@@ -26,7 +29,7 @@
       color: var(--neutral-color);
     }
     & .body{
-      // cursor: auto;
+      cursor: default;
       background-color: var(--neutral-color);
       flex: 1 1 auto;
       overflow-y: auto;
@@ -35,7 +38,7 @@
       flex-direction: column;
     }
     & .footer{
-      // cursor: auto;
+      cursor: default;
       flex-shrink: 0;
       display: flex;
       justify-content: flex-end;

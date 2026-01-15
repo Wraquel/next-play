@@ -13,7 +13,7 @@ export interface ModalProps {
 const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, footer}, ref) => {
   const _ref= useRef<HTMLDivElement | null>(null);
   const dialogWrapper = useRef<HTMLDialogElement | null >(null);
-  // const resizeDiv = useRef<HTMLDivElement | null >(null);
+  const resizeDiv = useRef<HTMLDivElement | null >(null);
 
   useImperativeHandle(ref, () => dialogWrapper.current!);
 
@@ -31,40 +31,36 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
     const dialog = dialogWrapper.current;
     if (!dialog) return;
     const headerRef = _ref.current;
-    // const resizeD = resizeDiv.current;
+    const resizeD = resizeDiv.current;
     document.body.style.position = 'relative';
-    // console.log('DIALOG MOUNTED', resizeD);
     const maxX = window.innerWidth - dialog.offsetWidth;
     const maxY = window.innerHeight - dialog.offsetHeight;
 
     let dragging = false;
-    // let resize = false;
+    let resize = false;
     let offsetX = 0;
     let offsetY = 0;
-    // let initialWidth = 0;
-    // let initialMouseX = 0;
+    let initialWidth = 0;
+    let initialMouseX = 0;
 
-    const handleMouseDown = (event: MouseEvent) => { // mouse positon
-      // if (event.target === dialogWrapper.current?.parentElement?.querySelector(`.${style.resize}`)) {
-        // if (event.target === resizeDiv.current) {
-        //   console.log('RESIZE START');
-        //   // Store initial values for resize
-        //   return;
-        // }
-        // resize = true;
-        // initialWidth = dialog.offsetWidth;
-        // initialMouseX = event.clientX;
-        
-        // MOVE
+    const handleMouseDown = (event: MouseEvent) => {
+        if (resizeD && event.target === resizeDiv.current && event.target !== headerRef) {
+          // console.log('RESIZE START');
+
+          // Store initial values for resize
+          resize = true;
+          initialWidth = dialog.offsetWidth;
+          initialMouseX = event.clientX;
+  
+        }
         if (dialog && event.target === headerRef) {
+          // console.log('DRAG START');
           dragging = true;
-          
           const rect = dialog.getBoundingClientRect();
 
           dialog.style.transform = 'none';
           dialog.style.left = `${rect.left}px`;
           dialog.style.top = `${rect.top}px`;
-          // dialog.style.transform = `translate(${rect.left}px, -${rect.top}px)`;
 
           offsetX = event.clientX - rect.left; // VW horizontal ditance from the left edge of the dialog to whre i clicked
           offsetY = event.clientY - rect.top;
@@ -86,33 +82,27 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
           dialog.style.left = `${x}px`;
           dialog.style.top = `${y}px`;
 
-          // dialog.style.transform = `translate(${x}px, -${y}px)`;
-          // console.log('Mouse Move', x, y);
-          // console.log('TRANSFORM', dialog.style.transform);
         }
-        // if (resize) {
-        //   // Calculate how much the mouse moved from initial position 
-        //   const mouseDelta = event.clientX - initialMouseX;
-        //   const newWidth = Math.max(300, initialWidth + mouseDelta); // Min width 300px
+        if (resize) {
+          // Calculate how much the mouse moved from initial position 
+          const mouseDelta = event.clientX - initialMouseX;
+          const newWidth = Math.max(300, initialWidth + mouseDelta);
           
-        //   dialog.style.width = `${newWidth}px`;
-        // }
+          dialog.style.width = `${newWidth}px`;
+        }
       }, 20)();
     };
     const handleMouseUp = () => {
       dragging = false;
-      // resize = false;
+      resize = false;
       if (headerRef) headerRef.style.cursor = 'move';
     };
 
-    // document.addEventListener('mousedown', handleResize);
     document.addEventListener('mousedown', handleMouseDown);
     document.addEventListener('mousemove', handleMouseMove);
     document.addEventListener('mouseup', handleMouseUp);
 
     return () => {
-    // document.addEventListener('mousedown', handleResize);
-
       document.removeEventListener('mousedown', handleMouseDown);
       document.removeEventListener('mousemove', handleMouseMove);
       document.removeEventListener('mouseup', handleMouseUp);
@@ -122,16 +112,15 @@ const Modal = forwardRef<HTMLDialogElement | null, ModalProps>(({header, body, f
     <>
       <div className={style.backdrop} aria-hidden="true"/>
       <div className={style.dialog}>
-        {/* <div className={style.resize}> */}
-          <dialog ref={dialogWrapper}>
-            <div className={style.header} ref={_ref}>
-              <h1>{header.text}</h1>
-              <span>{header.icon}</span>
-            </div>
-            <div className={style.body}>{body}</div>
-            {footer && <div className={style.footer}>{footer}</div>}
-          </dialog>
-        {/* </div> */}
+        <dialog ref={dialogWrapper}>
+          <div className={style.header} ref={_ref}>
+            <h1>{header.text}</h1>
+            <span>{header.icon}</span>
+          </div>
+          <div className={style.body}>{body}</div>
+          {footer && <div className={style.footer}>{footer}</div>}
+          <div ref={resizeDiv} className={style.resize}>aaaaa</div>
+        </dialog>
       </div>
     </>
   );
