@@ -1,5 +1,6 @@
 .dialog {
-  dialog:open { 
+
+  dialog:open {
     z-index: 9999;
     border: solid var(--neutral-color);
     opacity: 1;
@@ -7,7 +8,7 @@
     top: 35%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 60%;
+    width: 800px;
     border-radius: var(--unit-1);
     color: var(--primary-color);
     display: flex;
@@ -16,6 +17,8 @@
       cursor: move;
       background-color: var(--secondary-color);
       display: flex;
+      border-top-left-radius: var(--unit-1);
+      border-top-right-radius: var(--unit-1);
       align-items: center;
       justify-content: space-between;
       text-transform: capitalize;
@@ -23,6 +26,7 @@
       color: var(--neutral-color);
     }
     & .body{
+      // cursor: auto;
       background-color: var(--neutral-color);
       flex: 1 1 auto;
       overflow-y: auto;
@@ -31,6 +35,7 @@
       flex-direction: column;
     }
     & .footer{
+      // cursor: auto;
       flex-shrink: 0;
       display: flex;
       justify-content: flex-end;
@@ -38,6 +43,8 @@
       padding: var(--unit-1) var(--unit-4); 
       background-color: var(--secondary-color);
       gap: var(--unit-2);
+      border-bottom-left-radius: var(--unit-1);
+      border-bottom-right-radius: var(--unit-1);
     }
     dialog {
       opacity: 0;
