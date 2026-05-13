@@ -1,10 +1,11 @@
 .dialog {
-  .resize {
-    cursor: nwse-resize;
-    background-color: transparent;
-  }
   dialog:open {
+    .resize {
+      cursor: nwse-resize;
+      height: 4px;
+    }
     z-index: 9999;
+    background-color: var(--secondary-color);
     border: solid var(--neutral-color);
     opacity: 1;
     position: fixed;
@@ -16,7 +17,7 @@
     color: var(--primary-color);
     display: flex;
     flex-direction: column;
-    & .header{
+    & .header {
       cursor: move;
       background-color: var(--secondary-color);
       display: flex;
@@ -25,10 +26,10 @@
       align-items: center;
       justify-content: space-between;
       text-transform: capitalize;
-      padding: var(--unit-2) var(--unit-4); 
+      padding: var(--unit-2) var(--unit-4);
       color: var(--neutral-color);
     }
-    & .body{
+    & .body {
       cursor: default;
       background-color: var(--neutral-color);
       flex: 1 1 auto;
@@ -37,13 +38,13 @@
       display: flex;
       flex-direction: column;
     }
-    & .footer{
+    & .footer {
       cursor: default;
       flex-shrink: 0;
       display: flex;
       justify-content: flex-end;
       flex-wrap: wrap;
-      padding: var(--unit-1) var(--unit-4); 
+      padding: var(--unit-1) var(--unit-4);
       background-color: var(--secondary-color);
       gap: var(--unit-2);
       border-bottom-left-radius: var(--unit-1);
@@ -66,7 +67,7 @@
   height: 100vh;
   background-color: rgb(0 0 0 / 50%);
   backdrop-filter: blur(1px);
-  z-index: 9997; 
-  pointer-events: auto; 
+  z-index: 9997;
+  pointer-events: auto;
   cursor: default;
 }
